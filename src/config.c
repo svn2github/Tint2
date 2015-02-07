@@ -407,6 +407,10 @@ void add_entry (char *key, char *value)
 		if (strlen(value) > 0)
 			clock_lclick_command = strdup(value);
 	}
+	else if (strcmp(key, "clock_mclick_command") == 0) {
+		if (strlen(value) > 0)
+			clock_mclick_command = strdup(value);
+	}
 	else if (strcmp(key, "clock_rclick_command") == 0) {
 		if (strlen(value) > 0)
 			clock_rclick_command = strdup(value);

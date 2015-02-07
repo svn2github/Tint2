@@ -39,6 +39,7 @@ char *time2_timezone;
 char *time_tooltip_format;
 char *time_tooltip_timezone;
 char *clock_lclick_command;
+char *clock_mclick_command;
 char *clock_rclick_command;
 struct timeval time_clock;
 PangoFontDescription *time1_font_desc;
@@ -61,6 +62,7 @@ void default_clock()
 	time_tooltip_format = 0;
 	time_tooltip_timezone = 0;
 	clock_lclick_command = 0;
+	clock_mclick_command = 0;
 	clock_rclick_command = 0;
 	time1_font_desc = 0;
 	time2_font_desc = 0;
@@ -77,6 +79,7 @@ void cleanup_clock()
 	if (time2_timezone) g_free(time2_timezone);
 	if (time_tooltip_timezone) g_free(time_tooltip_timezone);
 	if (clock_lclick_command) g_free(clock_lclick_command);
+	if (clock_mclick_command) g_free(clock_mclick_command);
 	if (clock_rclick_command) g_free(clock_rclick_command);
 	if (clock_timeout) stop_timeout(clock_timeout);
 }
@@ -263,6 +266,9 @@ void clock_action(int button)
 	switch (button) {
 		case 1:
 		command = clock_lclick_command;
+		break;
+		case 2:
+		command = clock_mclick_command;
 		break;
 		case 3:
 		command = clock_rclick_command;
