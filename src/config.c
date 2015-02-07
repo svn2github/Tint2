@@ -289,6 +289,24 @@ void add_entry (char *key, char *value)
 	}
 
 	/* Battery */
+	else if (strcmp(key, "battery_lclick_command") == 0) {
+#ifdef ENABLE_BATTERY
+		if (strlen(value) > 0)
+			battery_lclick_command = strdup(value);
+#endif
+	}
+	else if (strcmp(key, "battery_mclick_command") == 0) {
+#ifdef ENABLE_BATTERY
+		if (strlen(value) > 0)
+			battery_mclick_command = strdup(value);
+#endif
+	}
+	else if (strcmp(key, "battery_rclick_command") == 0) {
+#ifdef ENABLE_BATTERY
+		if (strlen(value) > 0)
+			battery_rclick_command = strdup(value);
+#endif
+	}
 	else if (strcmp (key, "battery_low_status") == 0) {
 #ifdef ENABLE_BATTERY
 		battery_low_status = atoi(value);
