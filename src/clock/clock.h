@@ -33,6 +33,7 @@ extern char *time_tooltip_timezone;
 extern PangoFontDescription *time1_font_desc;
 extern PangoFontDescription *time2_font_desc;
 extern char *clock_lclick_command;
+extern char *clock_mclick_command;
 extern char *clock_rclick_command;
 extern int clock_enabled;
 

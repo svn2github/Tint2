@@ -406,11 +406,22 @@ int tint2_handles_click(Panel* panel, XButtonEvent* e)
 	if (tskbar && e->button == 1 && panel_mode == MULTI_DESKTOP)
 		return 1;
 	if (click_clock(panel, e->x, e->y)) {
-		if ( (e->button == 1 && clock_lclick_command) || (e->button == 3 && clock_rclick_command) )
+		if (  (e->button == 1 && clock_lclick_command) ||
+		      (e->button == 2 && clock_mclick_command) ||
+		      (e->button == 3 && clock_rclick_command) )
 			return 1;
 		else
 			return 0;
 	}
+	if (click_battery(panel, e->x, e->y)) {
+		if (  (e->button == 1 && battery_lclick_command) ||
+		      (e->button == 2 && battery_mclick_command) ||
+		      (e->button == 3 && battery_rclick_command) )
+			return 1;
+		else
+			return 0;
+	}
+
 	return 0;
 }
 
@@ -542,8 +553,16 @@ void event_button_release (XEvent *e)
 			break;
 	}
 
-	if ( click_clock(panel, e->xbutton.x, e->xbutton.y)) {
+	if (click_clock(panel, e->xbutton.x, e->xbutton.y)) {
 		clock_action(e->xbutton.button);
+		if (panel_layer == BOTTOM_LAYER)
+			XLowerWindow (server.dsp, panel->main_win);
+		task_drag = 0;
+		return;
+	}
+
+	if (click_battery(panel, e->xbutton.x, e->xbutton.y)) {
+		battery_action(e->xbutton.button);
 		if (panel_layer == BOTTOM_LAYER)
 			XLowerWindow (server.dsp, panel->main_win);
 		task_drag = 0;
